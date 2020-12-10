@@ -56,7 +56,7 @@ public class player_move_jump : MonoBehaviour {
             a += 2;
         }
 
-        if (Input.GetKey("w") || Input.GetKey("s") || Input.GetKey("a") || Input.GetKey("d"))
+        if (Input.GetKey("w") || Input.GetKeyDown("s") || Input.GetKey("a") || Input.GetKey("d"))
             animator.SetInteger("AnimationPar", 1);
         else
             animator.SetInteger("AnimationPar", 0);
