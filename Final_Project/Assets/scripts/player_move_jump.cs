@@ -26,6 +26,10 @@ public class player_move_jump : MonoBehaviour {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         moveDirection = new Vector3(h, 0, v);
+        if(Input.GetKey(KeyCode.LeftShift))
+            speed = 3;
+        else
+            speed = 2;
         if (Input.GetKey(KeyCode.W))
         {
             maindirection = speed * Time.deltaTime * transform.forward;
@@ -44,12 +48,7 @@ public class player_move_jump : MonoBehaviour {
         {
             transform.RotateAround(transform.position, new Vector3(0, 1, 0), Time.deltaTime * rotate_speed);
         }
-        if (Input.GetKey(KeyCode.RightShift) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
-        {
-            speed = 3;
-        }
-        else
-            speed = 2;
+        
         if (Input.GetKeyDown(KeyCode.Space) && a < 1)
         {
             rb.AddForce(jumpdirection * jumpforce);
@@ -65,5 +64,14 @@ public class player_move_jump : MonoBehaviour {
     {
         if (collision.gameObject.tag == "ground")
             a = 0;
+        if (collision.gameObject.tag == "monster")
+        {
+            rb.AddForce(transform.forward * -30);
+            Debug.Log("monster");
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 }
